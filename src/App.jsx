@@ -3,7 +3,9 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaArrowRight,
-  FaPaperPlane
+  FaPaperPlane,
+  FaBars,
+  FaTimes
 } from "react-icons/fa"
 
 import { TypeAnimation } from "react-type-animation"
@@ -179,7 +181,7 @@ const ContactForm = () => {
 };
 
 // Click GIF Animation Component
-const ClickGif = ({ clicks }) => {`+-*`
+const ClickGif = ({ clicks }) => {
   return (
     <>
       {clicks.map((click, index) => (
@@ -205,6 +207,7 @@ const ClickGif = ({ clicks }) => {`+-*`
 function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [clicks, setClicks] = useState([])
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -229,6 +232,24 @@ function App() {
     return () => window.removeEventListener('click', handleClick)
   }, [])
 
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Education', href: '#education' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
+  const handleNavClick = (href) => {
+    setMobileMenuOpen(false);
+    // Add smooth scroll behavior
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="bg-[#F5E6D3] text-black min-h-screen overflow-x-hidden relative">
       <ClickGif clicks={clicks} />
@@ -245,43 +266,77 @@ function App() {
 
       {/* Navbar */}
       <nav className="flex justify-between items-center px-6 md:px-10 py-5 sticky top-0 bg-[#F5E6D3] z-50">
-        <h1 className="text-3xl font-bold text-black w-12 h-12 rounded-full bg-[#F5E6D3] border-3 border-black flex items-center justify-center">
-          M
-        </h1>
+        {/* Logo */}
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative"
+        >
+          <a href="#home">
+            <div className="w-14 h-14 rounded-full bg-black border-3 border-black flex items-center justify-center relative overflow-hidden cursor-pointer">
+              {/* Animated background circle */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[#F5E6D3] to-black rounded-full"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              />
+              {/* M text */}
+              <span className="text-4xl font-black text-[#F5E6D3] relative z-10 tracking-tight">M</span>
+            </div>
+          </a>
+        </motion.div>
 
+        {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-8 text-sm font-medium">
-          <li>
-            <a href="#home" className="hover:text-black transition duration-300">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="hover:text-black transition duration-300">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#skills" className="hover:text-black transition duration-300">
-              Skills
-            </a>
-          </li>
-          <li>
-            <a href="#education" className="hover:text-black transition duration-300">
-              Education
-            </a>
-          </li>
-          <li>
-            <a href="#projects" className="hover:text-black transition duration-300">
-              Projects
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-black transition duration-300">
-              Contact
-            </a>
-          </li>
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <a 
+                href={link.href} 
+                onClick={() => handleNavClick(link.href)}
+                className="relative group text-black hover:text-black transition duration-300"
+              >
+                {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+              </a>
+            </li>
+          ))}
         </ul>
+
+        {/* Mobile Hamburger Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border-2 border-black hover:bg-black hover:text-[#F5E6D3] transition duration-300 z-50"
+        >
+          {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        </button>
       </nav>
+
+      {/* Mobile Navigation Menu */}
+      <motion.div
+        initial={{ opacity: 0, y: -20, height: 0 }}
+        animate={mobileMenuOpen ? { opacity: 1, y: 0, height: 'auto' } : { opacity: 0, y: -20, height: 0 }}
+        transition={{ duration: 0.3 }}
+        className="md:hidden overflow-hidden border-b-2 border-black bg-[#F5E6D3]"
+      >
+        <ul className="flex flex-col gap-0 py-4">
+          {navLinks.map((link, index) => (
+            <motion.li
+              key={link.name}
+              initial={{ opacity: 0, x: -20 }}
+              animate={mobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+            >
+              <a
+                href={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="block px-6 py-3 text-black font-medium border-l-4 border-transparent hover:border-black hover:bg-[#F9F5F0] transition duration-200"
+              >
+                {link.name}
+              </a>
+            </motion.li>
+          ))}
+        </ul>
+      </motion.div>
 
       {/* Hero Section */}
       <motion.section

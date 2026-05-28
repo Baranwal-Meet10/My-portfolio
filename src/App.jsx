@@ -241,7 +241,8 @@ function App() {
     { name: 'Contact', href: '#contact' }
   ];
 
-  const handleNavClick = (href) => {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
     // Add smooth scroll behavior
     const element = document.querySelector(href);
@@ -292,7 +293,7 @@ function App() {
             <li key={link.name}>
               <a 
                 href={link.href} 
-                onClick={() => handleNavClick(link.href)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="relative group text-black hover:text-black transition duration-300"
               >
                 {link.name}
@@ -328,7 +329,7 @@ function App() {
             >
               <a
                 href={link.href}
-                onClick={() => handleNavClick(link.href)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="block px-6 py-3 text-black font-medium border-l-4 border-transparent hover:border-black hover:bg-[#F9F5F0] transition duration-200"
               >
                 {link.name}

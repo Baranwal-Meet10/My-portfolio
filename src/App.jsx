@@ -244,10 +244,15 @@ function App() {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    // Add smooth scroll behavior
+    // Add smooth scroll behavior with offset for navbar
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navHeight = 80; // Approximate navbar height in pixels
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

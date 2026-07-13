@@ -1,16 +1,50 @@
-# React + Vite
+# 🚀 Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive personal portfolio website built to showcase my software engineering journey, projects, technical skills, and professional experience.
 
-Currently, two official plugins are available:
+## 🛠️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** React, Vite, HTML5, CSS3 / Tailwind CSS
+- **Backend:** Node.js, Express (if applicable)
+- **Email Service:** EmailJS (integrated for the contact form)
+- **Deployment:** GitHub Pages / Vercel / Netlify (choose yours)
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Responsive Design:** Optimized for mobile, tablet, and desktop viewports.
+- **Project Showcase:** Highlights key projects with live links and GitHub repositories.
+- **Contact Form:** Fully functional contact form powered by EmailJS and Node.js.
+- **Fast Performance:** Bundled and optimized using Vite for near-instant loading times.
 
-## Expanding the ESLint configuration
+## ⚙️ Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Follow these steps to run the project locally on your machine.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com
+cd My-portfolio
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Environment Variables
+Create a `.env` file in the root directory and add your EmailJS / API credentials:
+```env
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+### 4. Run the Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser to view the site.
+
+## 📄 License
+
+This project is licensed under the MIT License.

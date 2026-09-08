@@ -5,7 +5,8 @@ import {
   FaArrowRight,
   FaPaperPlane,
   FaBars,
-  FaTimes
+  FaTimes,
+  FaExternalLinkAlt
 } from "react-icons/fa"
 
 import { TypeAnimation } from "react-type-animation"
@@ -19,6 +20,7 @@ import emailjs from '@emailjs/browser'
 import heroImage from './assets/hero.gif'
 import surveillanceImage from './assets/assets_abnormal_20250421_164900_frame_165.jpg'
 import meetPhoto from './assets/Meet.jpeg'
+import giftlinkImage from './assets/giftlink.jpg'
 
 // Initialize EmailJS - ADD YOUR PUBLIC KEY HERE
 emailjs.init('CDrgeX8T-AQ83AVlM');
@@ -610,11 +612,12 @@ function App() {
                 github: "https://github.com/Baranwal-Meet10/crowd-monitoring-alert-system"
               },
               {
-                title: "DOCLN",
-                desc: "A simple web app for doctors to connect, share updates, browse research, and chat—like a professional, healthcare-focused social app.",
-                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-                languages: ["React", "Node.js", "MongoDB"],
-                github: "https://github.com/Baranwal-Meet10/DocIn-"
+                title: "🎁 GiftLink (Magic Moment)",
+                desc: "A privacy-focused, interactive digital gift-unwrapping web application. Create custom gift messages with curated visual themes and photos, shared via unguessable secret links, unwrappable exactly once.",
+                image: giftlinkImage,
+                languages: ["React 19", "TanStack", "TypeScript", "Tailwind CSS v4", "Supabase", "Vite"],
+                github: "https://github.com/Baranwal-Meet10/Magic_moment",
+                live: "https://giftlink-seven.vercel.app"
               }
             ].map((project, index) => (
               <motion.div
@@ -651,12 +654,19 @@ function App() {
                     {project.desc}
                   </p>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 flex-wrap">
                     <a href={project.github} target="_blank" rel="noopener noreferrer">
                       <button className="bg-black text-[#F5E6D3] px-5 py-3 rounded-xl font-bold hover:scale-105 transition duration-300 flex items-center gap-2">
                         <FaGithub /> Explore
                       </button>
                     </a>
+                    {project.live && (
+                      <a href={project.live} target="_blank" rel="noopener noreferrer">
+                        <button className="bg-[#E5D4C0] border-2 border-black text-black px-5 py-3 rounded-xl font-bold hover:scale-105 transition duration-300 flex items-center gap-2">
+                          <FaExternalLinkAlt /> Live Demo
+                        </button>
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>

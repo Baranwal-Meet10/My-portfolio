@@ -612,7 +612,7 @@ function App() {
                 github: "https://github.com/Baranwal-Meet10/crowd-monitoring-alert-system"
               },
               {
-                title: "🎁 GiftLink (Magic Moment)",
+                title: "GiftLink (Magic Moment)",
                 desc: "A privacy-focused, interactive digital gift-unwrapping web application. Create custom gift messages with curated visual themes and photos, shared via unguessable secret links, unwrappable exactly once.",
                 image: giftlinkImage,
                 languages: ["React 19", "TanStack", "TypeScript", "Tailwind CSS v4", "Supabase", "Vite"],
@@ -626,14 +626,14 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: false }}
-                whileHover={{ y: -12 }}
-                className="bg-[#F9F5F0] border-2 border-black rounded-3xl overflow-hidden"
+                whileHover={{ y: -8 }}
+                className="bg-[#F9F5F0] border-2 border-black rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
               >
-                <div className="h-52 bg-gray-300 overflow-hidden">
+                <div className="h-52 sm:h-60 bg-gray-300 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover hover:scale-105 transition duration-300"
+                    className="w-full h-full object-cover hover:scale-105 transition duration-500"
                   />
                 </div>
 
@@ -654,7 +654,7 @@ function App() {
                     {project.desc}
                   </p>
 
-                  <div className="flex gap-3 flex-wrap">
+                  <div className="flex gap-3 flex-wrap items-center">
                     <a href={project.github} target="_blank" rel="noopener noreferrer">
                       <button className="bg-black text-[#F5E6D3] px-5 py-3 rounded-xl font-bold hover:scale-105 transition duration-300 flex items-center gap-2">
                         <FaGithub /> Explore
@@ -662,7 +662,7 @@ function App() {
                     </a>
                     {project.live && (
                       <a href={project.live} target="_blank" rel="noopener noreferrer">
-                        <button className="bg-[#E5D4C0] border-2 border-black text-black px-5 py-3 rounded-xl font-bold hover:scale-105 transition duration-300 flex items-center gap-2">
+                        <button className="border-2 border-black text-black hover:bg-black hover:text-[#F5E6D3] px-5 py-3 rounded-xl font-bold hover:scale-105 transition duration-300 flex items-center gap-2">
                           <FaExternalLinkAlt /> Live Demo
                         </button>
                       </a>

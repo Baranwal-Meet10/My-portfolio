@@ -207,18 +207,8 @@ const ClickGif = ({ clicks }) => {
 }
 
 function App() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [clicks, setClicks] = useState([])
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -262,18 +252,8 @@ function App() {
     <div className="bg-[#F5E6D3] text-black min-h-screen overflow-x-hidden relative">
       <ClickGif clicks={clicks} />
       
-      <div
-        className="fixed pointer-events-none text-5xl z-[999] transition-all duration-75"
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-      </div>
-
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-6 md:px-10 py-5 sticky top-0 bg-[#F5E6D3] z-50">
+      <nav className="flex justify-between items-center px-6 md:px-10 py-5 sticky top-0 bg-[#F5E6D3]/90 backdrop-blur-md z-50 transition-all duration-300">
         {/* Logo */}
         <motion.div
           whileHover={{ scale: 1.1 }}
@@ -446,7 +426,6 @@ function App() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="text-2xl font-bold text-black mt-6 tracking-wide"></p>
           </div>
 
           <div className="max-w-3xl mx-auto mb-16">

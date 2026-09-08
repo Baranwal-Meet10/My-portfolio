@@ -209,6 +209,15 @@ const ClickGif = ({ clicks }) => {
 function App() {
   const [clicks, setClicks] = useState([])
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -253,23 +262,20 @@ function App() {
       <ClickGif clicks={clicks} />
       
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-6 md:px-10 py-5 sticky top-0 bg-[#F5E6D3]/90 backdrop-blur-md z-50 transition-all duration-300">
+      <nav className={`flex justify-between items-center px-6 md:px-10 sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "bg-[#F5E6D3]/95 backdrop-blur-md border-b-2 border-black shadow-md py-3.5" 
+          : "bg-[#F5E6D3] border-b-2 border-transparent py-5"
+      }`}>
         {/* Logo */}
         <motion.div
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="relative"
         >
-          <a href="#home">
-            <div className="w-14 h-14 rounded-full bg-black border-3 border-black flex items-center justify-center relative overflow-hidden cursor-pointer">
-              {/* Animated background circle */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-[#F5E6D3] to-black rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              {/* M text */}
-              <span className="text-4xl font-black text-[#F5E6D3] relative z-10 tracking-tight">M</span>
+          <a href="#home" onClick={(e) => handleNavClick(e, '#home')}>
+            <div className="w-12 h-12 rounded-2xl bg-black border-2 border-black flex items-center justify-center shadow-md cursor-pointer hover:bg-zinc-900 transition-all duration-300">
+              <span className="text-2xl font-black text-[#F5E6D3] tracking-wider select-none">M</span>
             </div>
           </a>
         </motion.div>

@@ -258,79 +258,87 @@ function App() {
   };
 
   return (
-    <div className="bg-[#F5E6D3] text-black min-h-screen overflow-x-hidden relative">
+    <div className="bg-[#F5E6D3] text-black min-h-screen relative pt-20">
       <ClickGif clicks={clicks} />
       
-      {/* Navbar */}
-      <nav className={`flex justify-between items-center px-6 md:px-10 sticky top-0 z-50 transition-all duration-300 ${
+      {/* Navbar Header (Fixed on scroll) */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-[#F5E6D3]/95 backdrop-blur-md border-b-2 border-black shadow-md py-3.5" 
-          : "bg-[#F5E6D3] border-b-2 border-transparent py-5"
+          ? "bg-[#F5E6D3]/95 backdrop-blur-md border-b-2 border-black shadow-md" 
+          : "bg-[#F5E6D3] border-b-2 border-transparent"
       }`}>
-        {/* Logo */}
+        <nav className={`flex justify-between items-center px-6 md:px-10 transition-all duration-300 ${
+          isScrolled ? "py-3.5" : "py-5"
+        }`}>
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative"
+          >
+            <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-3 group">
+              <div className="w-11 h-11 rounded-2xl bg-black border-2 border-black flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                <span className="text-xl font-black text-[#F5E6D3] tracking-wider select-none font-sans">M</span>
+              </div>
+              <span className="font-extrabold text-lg text-black tracking-tight select-none">
+                Meet<span className="text-zinc-600">.</span>
+              </span>
+            </a>
+          </motion.div>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex gap-8 text-sm font-semibold">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a 
+                  href={link.href} 
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="relative group text-black hover:text-black transition duration-300 py-1"
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Hamburger Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border-2 border-black hover:bg-black hover:text-[#F5E6D3] transition duration-300 z-50"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          </button>
+        </nav>
+
+        {/* Mobile Navigation Menu */}
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="relative"
+          initial={{ opacity: 0, height: 0 }}
+          animate={mobileMenuOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden overflow-hidden border-t-2 border-black bg-[#F5E6D3]"
         >
-          <a href="#home" onClick={(e) => handleNavClick(e, '#home')}>
-            <div className="w-12 h-12 rounded-2xl bg-black border-2 border-black flex items-center justify-center shadow-md cursor-pointer hover:bg-zinc-900 transition-all duration-300">
-              <span className="text-2xl font-black text-[#F5E6D3] tracking-wider select-none">M</span>
-            </div>
-          </a>
+          <ul className="flex flex-col gap-0 py-3">
+            {navLinks.map((link, index) => (
+              <motion.li
+                key={link.name}
+                initial={{ opacity: 0, x: -20 }}
+                animate={mobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+              >
+                <a
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="block px-6 py-3 text-black font-semibold border-l-4 border-transparent hover:border-black hover:bg-[#F9F5F0] transition duration-200"
+                >
+                  {link.name}
+                </a>
+              </motion.li>
+            ))}
+          </ul>
         </motion.div>
-
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex gap-8 text-sm font-medium">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <a 
-                href={link.href} 
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="relative group text-black hover:text-black transition duration-300"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Hamburger Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border-2 border-black hover:bg-black hover:text-[#F5E6D3] transition duration-300 z-50"
-        >
-          {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-        </button>
-      </nav>
-
-      {/* Mobile Navigation Menu */}
-      <motion.div
-        initial={{ opacity: 0, y: -20, height: 0 }}
-        animate={mobileMenuOpen ? { opacity: 1, y: 0, height: 'auto' } : { opacity: 0, y: -20, height: 0 }}
-        transition={{ duration: 0.3 }}
-        className="md:hidden overflow-hidden border-b-2 border-black bg-[#F5E6D3]"
-      >
-        <ul className="flex flex-col gap-0 py-4">
-          {navLinks.map((link, index) => (
-            <motion.li
-              key={link.name}
-              initial={{ opacity: 0, x: -20 }}
-              animate={mobileMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-            >
-              <a
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block px-6 py-3 text-black font-medium border-l-4 border-transparent hover:border-black hover:bg-[#F9F5F0] transition duration-200"
-              >
-                {link.name}
-              </a>
-            </motion.li>
-          ))}
-        </ul>
-      </motion.div>
+      </header>
 
       {/* Hero Section */}
       <motion.section

@@ -18,7 +18,7 @@ body {
 
 /* Custom Scrollbar - Single Clean Page Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -26,13 +26,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #18181b;
-  border-radius: 10px;
+  background: #000000;
+  border-radius: 9999px;
   border: 2px solid #F5E6D3;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #27272a;
 }
 
 /* Ambient Background Glow */
